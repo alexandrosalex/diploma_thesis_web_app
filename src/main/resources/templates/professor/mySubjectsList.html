@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>My Subjects-DWA</title>
+    <style>
+        body {
+            padding-top: 40px;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"],
+        a.btn {
+            width: 49%;
+            margin-top: 10px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h2 class="text-center">My Subjects</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="subject : ${subjectList}">
+                    <td>
+                        <span th:text="${subject.title}"></span>
+                    </td>
+                    <td>
+                        <form th:action="@{/professor/edit_subject}" method="get">
+                            <input type="hidden" name="id" th:value="${subject.id}" />
+                            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                        </form>
+                        <form th:action="@{/professor/delete_subject}" method="post">
+                            <input type="hidden" name="id" th:value="${subject.id}" />
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+						<form th:action="@{/professor/show_applicants}" method="get">
+						    <input type="hidden" name="subjectId" th:value="${subject.id}" />
+						    <button type="submit" class="btn btn-primary btn-sm">Show Applicants</button>
+						</form>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="container text-center">
+    		<a th:href="@{/professor/add_subject}" class="btn btn-primary btn-sm mb-3"> Add Subject</a>
+	    </div> 
+        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+			<p th:text="${errorMessage}"></p>
+		</div>
+		<div th:if="${successMessage}" class="alert alert-success" role="alert">
+			<p th:text="${successMessage}"></p>
+		</div>
+		<div class="container text-center">
+        	<a href="/" class="btn btn-primary">Home</a>
+        </div>
+
+    </div> 
+</body>
+</html>

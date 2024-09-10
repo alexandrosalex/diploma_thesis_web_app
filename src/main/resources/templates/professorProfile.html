@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Professor Profile-DWA</title>
+    <style>
+        body {
+            padding-top: 40px;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"],
+        a.btn {
+            width: 49%;
+            margin-top: 10px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Professor Profile</h1>
+        <form>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control-plaintext" id="username" readonly th:value="${professor.username}">
+            </div>
+            <div class="form-group">
+                <label for="fullname">Full name:</label>
+                <input type="text" class="form-control-plaintext" id="fullname" readonly th:value="${professor.fullname}">
+            </div>
+            <div class="form-group">
+                <label for="specialty">Specialty:</label>
+                <input type="text" class="form-control-plaintext" id="specialty" readonly th:value="${professor.specialty}">
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <input type="text" class="form-control-plaintext" id="role" readonly th:value="${professor.role}">
+            </div>
+            <a th:href="@{/professor/edit_profile_professor}" th:if="${#authentication.principal.username == professor.username}" class="btn btn-primary btn-block">Edit Profile</a>
+        </form>
+        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+			<p th:text="${errorMessage}"></p>
+		</div>
+		<div th:if="${successMessage}" class="alert alert-success" role="alert">
+			<p th:text="${successMessage}"></p>
+		</div>
+		<div class="container text-center">
+        	<a href="/" class="btn btn-primary">Home</a>
+        </div>
+    </div>
+</body>
+</html>

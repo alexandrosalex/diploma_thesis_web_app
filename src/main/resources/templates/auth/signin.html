@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Ηomepage-DWA</title>
+    <style>
+        body {
+            padding-top: 40px;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"],
+        a.btn {
+            width: 49%;
+            margin-top: 10px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form th:action="@{/login}" method="POST">
+            <h3 th:text="Login"></h3>
+            <input type="text" name="username" th:placeholder="Username" />
+            <br /><br />
+            <input type="password" th:placeholder="Password" name="password" />
+            <br /><br />
+            <button type="Submit" class="btn btn-primary">Login</button>
+            <a th:href="@{register}" class="btn btn-info">Register</a>
+            <br />
+             <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                <p>Username or Password is invalid.</p>
+            </div>
+			<div th:if="${successMessage}" class="alert alert-success" role="alert">
+				<p th:text="${successMessage}"></p>
+			</div>
+            
+        </form>
+    </div>
+</body>
+
+</html>
